@@ -30,5 +30,4 @@
   - >
     git cleanall -f
     shell/plugins/
-    vim/pack/vendor/start/
     zsh/plugins/
