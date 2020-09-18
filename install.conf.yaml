@@ -16,18 +16,16 @@
     ~/.inputrc:
     ~/.shell:
     ~/.tmux.conf:
-    ~/.vim:
     ~/.vimrc:
-    ~/.zsh:
     ~/.zshrc:
 
-- create:
-
 - shell:
+  - curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  - sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  - curl -L git.io/antigen > ~/antigen.zsh
   - git submodule sync --recursive
   # the following have to run after linking ~/.gitconfig
   - git update-submodules
   - >
     git cleanall -f
     shell/plugins/
-    zsh/plugins/

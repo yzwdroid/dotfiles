@@ -1,43 +1,25 @@
-# Functions
-source ~/.shell/functions.sh
+export ZSH="/home/zyang/.oh-my-zsh"
+source ~/antigen.zsh
+antigen use oh-my-zsh
 
-# Allow local customizations in the ~/.shell_local_before file
-if [ -f ~/.shell_local_before ]; then
-    source ~/.shell_local_before
-fi
+antigen bundle git
+antigen bundle fzf
+antigen bundle tmux
+antigen bundle autojump
+antigen bundle heroku
+antigen bundle lein
+antigen bundle command-not-found
 
-# Allow local customizations in the ~/.zshrc_local_before file
-if [ -f ~/.zshrc_local_before ]; then
-    source ~/.zshrc_local_before
-fi
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-autosuggestions
+antigen apply
 
-# External plugins (initialized before)
-source ~/.zsh/plugins_before.zsh
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="ys"
+export PATH=$PATH:/usr/local/go/bin
+source $ZSH/oh-my-zsh.sh
+# User configuration
+# alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Settings
-source ~/.zsh/settings.zsh
-
-# Bootstrap
-source ~/.shell/bootstrap.sh
-
-# External settings
-source ~/.shell/external.sh
-
-# Aliases
-source ~/.shell/aliases.sh
-
-# Custom prompt
-source ~/.zsh/prompt.zsh
-
-# External plugins (initialized after)
-source ~/.zsh/plugins_after.zsh
-
-# Allow local customizations in the ~/.shell_local_after file
-if [ -f ~/.shell_local_after ]; then
-    source ~/.shell_local_after
-fi
-
-# Allow local customizations in the ~/.zshrc_local_after file
-if [ -f ~/.zshrc_local_after ]; then
-    source ~/.zshrc_local_after
-fi
