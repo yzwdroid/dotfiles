@@ -103,6 +103,8 @@
 
 [user]
 	useConfigOnly = true
+	email = yzwdroid@gmail.com
+	name = yzwdroid
 
 [http]
 	cookieFile = ~/.gitcookies
