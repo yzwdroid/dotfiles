@@ -16,6 +16,7 @@ antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-autosuggestions
 antigen apply
 
+export EDITOR=vim
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="ys"
 export PATH=$PATH:/usr/local/go/bin
