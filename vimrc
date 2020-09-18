@@ -5,7 +5,7 @@ set smartindent
 "set number
 "set relativenumber
 filetype plugin indent on
- syntax enable
+syntax enable
 "curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 "    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 "    :w !bash
@@ -21,7 +21,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'vim-airline/vim-airline'
 "Plug 'ludovicchabant/vim-gutentags'
 "Plug 'tpope/vim-heroku'
-"Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale'
 "Plug 'ycm-core/YouCompleteMe'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -39,8 +39,17 @@ Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'majutsushi/tagbar'
+Plug 'sheerun/vim-polyglot'
 
-"Plug 'davidhalter/jedi-vim'
+if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+Plug 'Shougo/deoplete-clangx'
 call plug#end()
 
 let mapleader = ","
@@ -137,7 +146,7 @@ vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 "let g:cpp_class_decl_highlight = 1
 "let g:cpp_experimental_simple_template_highlight = 1
 
-let g:ale_linters = {'cpp':['clang'],'c': ['clang'],'python':['pylint'],'javascript': ['eslint'], 'go': ['golint']}
+let g:ale_linters = {'cpp':['clang'],'c': ['clang'],'python':['pylint'],'javascript': ['eslint'], 'go': ['gopls']}
 let g:ale_linters_explicit = 1
 let g:ale_completion_delay = 500
 let g:ale_echo_delay = 20
@@ -215,10 +224,10 @@ let NERDTreeKeepTreeInNewTab=1
 " }
 
 let g:vimwiki_list = [{
-             \ 'path': '~/Dropbox/seneca/zyang/config/vimwiki/',
-             \ 'template_path': '~/Dropbox/seneca/zyang/config/vimwiki/templates',
-             \ 'template_default': 'default',
-             \ 'template_ext': '.html'}]
+            \ 'path': '~/Dropbox/seneca/zyang/config/vimwiki/',
+            \ 'template_path': '~/Dropbox/seneca/zyang/config/vimwiki/templates',
+            \ 'template_default': 'default',
+            \ 'template_ext': '.html'}]
 " let g:vimwiki_list = [{
 "             \ 'path': '~/Dropbox/seneca/zyang/config/vimwiki/',
 "             \ 'syntax': 'markdown', 'ext': '.md',
@@ -267,6 +276,7 @@ tnoremap <c-h> <c-w><c-h>
 colorscheme PaperColor
 set t_Co=256
 
+call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' }) 
 "---------------------
 " Local customizations
 "---------------------

@@ -1,4 +1,4 @@
-export ZSH="/home/zyang/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 source ~/antigen.zsh
 antigen use oh-my-zsh
 
@@ -18,7 +18,7 @@ antigen apply
 
 export EDITOR=vim
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="ys"
+ZSH_THEME="agnoster"
 export PATH=$PATH:/usr/local/go/bin
 source $ZSH/oh-my-zsh.sh
 # User configuration
