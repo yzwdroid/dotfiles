@@ -1,6 +1,7 @@
+[user]
+	name = Andy Yang
+	email = yzwdroid@gmail.com
 [alias]
-	dropbox = ! "git-dropbox-manage"
-	exec = ! "exec"
 	st = status -sb
 	versions = tag -l --sort=version:refname
 	br = branch -vv
@@ -100,11 +101,6 @@
 [advice]
 	detachedHead = false
 	waitingForEditor = false
-
-[user]
-	useConfigOnly = true
-	email = yzwdroid@gmail.com
-	name = yzwdroid
 
 [http]
 	cookieFile = ~/.gitcookies

@@ -3,23 +3,22 @@ source ~/antigen.zsh
 antigen use oh-my-zsh
 
 antigen bundle git
-antigen bundle fzf
 antigen bundle tmux
-antigen bundle autojump
-antigen bundle heroku
 antigen bundle lein
 antigen bundle command-not-found
-
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-autosuggestions
 antigen apply
 
+#jump by go
+eval "$(jump shell)"
+
+plugins=(fzf)
 export EDITOR=vim
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="agnoster"
-export PATH=$PATH:/usr/local/go/bin
+ZSH_THEME="dpoggi"
+export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
 source $ZSH/oh-my-zsh.sh
 # User configuration
 # alias ohmyzsh="mate ~/.oh-my-zsh"
