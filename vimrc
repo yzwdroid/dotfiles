@@ -1,9 +1,8 @@
-
 set nocompatible
 set backspace=indent,eol,start
 set smartindent
-"set number
-"set relativenumber
+set number
+set relativenumber
 filetype plugin indent on
 syntax enable
 "curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -19,10 +18,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'vim-airline/vim-airline'
-"Plug 'ludovicchabant/vim-gutentags'
-"Plug 'tpope/vim-heroku'
 Plug 'dense-analysis/ale'
-"Plug 'ycm-core/YouCompleteMe'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'vimwiki/vimwiki'
@@ -43,6 +39,9 @@ Plug 'sheerun/vim-polyglot'
 Plug 'roxma/vim-tmux-clipboard'
 Plug 'tmux-plugins/vim-tmux', {'for': 'tmux'}
 Plug 'tmux-plugins/vim-tmux-focus-events'
+"Plug 'ludovicchabant/vim-gutentags'
+"Plug 'tpope/vim-heroku'
+"Plug 'ycm-core/YouCompleteMe'
 
 if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -158,7 +157,7 @@ let g:ale_echo_msg_format = '[%linter%] %code: %%s'
 let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
 let g:airline#extensions#ale#enabled = 1
-let g:ale_cpp_clang_options = '-std=c++17 -Wall'
+let g:ale_cpp_clang_options = '-std=c++20 -Wall'
 "let g:ale_enabled = 0
 nmap <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
@@ -226,21 +225,21 @@ let NERDTreeShowHidden=0
 let NERDTreeKeepTreeInNewTab=1
 " }
 
+"let g:vimwiki_list = [{
+"            \ 'path': '~/Dropbox/seneca/zyang/config/vimwiki/',
+"            \ 'template_path': '~/Dropbox/seneca/zyang/config/vimwiki/templates',
+"            \ 'template_default': 'default',
+"            \ 'template_ext': '.html'}]
 let g:vimwiki_list = [{
             \ 'path': '~/Dropbox/seneca/zyang/config/vimwiki/',
+            \ 'syntax': 'markdown', 'ext': '.md',
             \ 'template_path': '~/Dropbox/seneca/zyang/config/vimwiki/templates',
             \ 'template_default': 'default',
             \ 'template_ext': '.html'}]
-" let g:vimwiki_list = [{
-"             \ 'path': '~/Dropbox/seneca/zyang/config/vimwiki/',
-"             \ 'syntax': 'markdown', 'ext': '.md',
-"             \ 'template_path': '~/Dropbox/seneca/zyang/config/vimwiki/templates',
-"             \ 'template_default': 'default',
-"             \ 'template_ext': '.html'}]
-" let g:vimwiki_global_ext = 0
+let g:vimwiki_global_ext = 0
 
 " Dadbob
-let g:db="postgresql://zyang:Yangzongwei22@zyang.ca:5432/zyangdb"
+" let g:db="postgresql://zyang:Yangzongwei22@zyang.ca:5432/zyangdb"
 
 " Golang
 au FileType go nmap <Leader>s <Plug>(go-implements)
@@ -280,12 +279,3 @@ colorscheme PaperColor
 set t_Co=256
 
 call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' }) 
-"---------------------
-" Local customizations
-"---------------------
-
-" local customizations in ~/.vimrc_local
-let $LOCALFILE=expand("~/.vimrc_local")
-if filereadable($LOCALFILE)
-    source $LOCALFILE
-endif
