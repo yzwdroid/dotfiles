@@ -82,12 +82,14 @@
 [merge]
 	defaultToUpstream = true
 	tool = vimdiff
+	conflictstyle = diff3
 
 [pull]
 	ff = only
 
 [mergetool]
 	keepBackup = false
+	prompt = false
 
 [push]
 	default = upstream
