@@ -1,5 +1,6 @@
 # Functions
 source ~/.shell/functions.sh
+export TERM=screen-256color
 
 # Allow local customizations in the ~/.shell_local_before file
 if [ -f ~/.shell_local_before ]; then
@@ -38,3 +39,4 @@ fi
 if [ -f ~/.bashrc_local_after ]; then
     source ~/.bashrc_local_after
 fi
+
