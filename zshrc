@@ -1,5 +1,6 @@
 export ZSH="$HOME/.oh-my-zsh"
 source ~/antigen.zsh
+export TERM=xterm-256color
 antigen use oh-my-zsh
 
 antigen bundle git
@@ -17,7 +18,7 @@ eval "$(jump shell)"
 
 plugins=(fzf)
 export EDITOR=vim
-ZSH_THEME="dpoggi"
+ZSH_THEME="random"
 export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
 source $ZSH/oh-my-zsh.sh
 # User configuration

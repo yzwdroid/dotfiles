@@ -9,6 +9,8 @@ syntax enable
 "    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 "    :w !bash
 call plug#begin('~/.vim/plugged')
+Plug 'Raimondi/delimitMate'
+Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
@@ -39,19 +41,12 @@ Plug 'sheerun/vim-polyglot'
 Plug 'roxma/vim-tmux-clipboard'
 Plug 'tmux-plugins/vim-tmux', {'for': 'tmux'}
 Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'fatih/molokai'
+Plug 'octol/vim-cpp-enhanced-highlight'
 "Plug 'ludovicchabant/vim-gutentags'
 "Plug 'tpope/vim-heroku'
 "Plug 'ycm-core/YouCompleteMe'
 
-if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-endif
-let g:deoplete#enable_at_startup = 1
-Plug 'Shougo/deoplete-clangx'
 call plug#end()
 
 let mapleader = ","
@@ -177,7 +172,7 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
 
 " Setup for markdown
 let g:vim_markdown_toc_autofit = 1
-set conceallevel=2
+"set conceallevel=2
 
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
@@ -232,10 +227,7 @@ let NERDTreeKeepTreeInNewTab=1
 "            \ 'template_ext': '.html'}]
 let g:vimwiki_list = [{
             \ 'path': '~/Dropbox/seneca/zyang/config/vimwiki/',
-            \ 'syntax': 'markdown', 'ext': '.md',
-            \ 'template_path': '~/Dropbox/seneca/zyang/config/vimwiki/templates',
-            \ 'template_default': 'default',
-            \ 'template_ext': '.html'}]
+            \ 'syntax': 'markdown', 'ext': '.md'}]
 let g:vimwiki_global_ext = 0
 
 " Dadbob
@@ -278,4 +270,3 @@ tnoremap <c-h> <c-w><c-h>
 colorscheme PaperColor
 set t_Co=256
 
-call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' }) 
