@@ -13,10 +13,7 @@ antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-autosuggestions
 antigen apply
 
-#jump by go
-eval "$(jump shell)"
-
-plugins=(fzf)
+plugins=(fzf autojump)
 export EDITOR=vim
 ZSH_THEME="random"
 export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
