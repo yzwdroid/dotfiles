@@ -42,6 +42,7 @@ Plug 'roxma/vim-tmux-clipboard'
 Plug 'tmux-plugins/vim-tmux', {'for': 'tmux'}
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'fatih/molokai'
+Plug 'morhetz/gruvbox'
 Plug 'octol/vim-cpp-enhanced-highlight'
 "Plug 'ludovicchabant/vim-gutentags'
 "Plug 'tpope/vim-heroku'
@@ -346,7 +347,5 @@ tnoremap <c-l> <c-w><c-l>
 tnoremap <c-h> <c-w><c-h>
 
 "let g:ycm_filetype_blacklist = {'tagbar': 1, 'notes': 1,'netrw': 1, 'unite': 1, 'text': 1, 'vimwiki': 1, 'pandoc': 1, 'infolog': 1, 'leaderf': 1, 'mail': 1}
-colorscheme PaperColor
+colorscheme gruvbox
 set t_Co=256
-
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
