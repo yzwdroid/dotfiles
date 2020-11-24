@@ -27,4 +27,4 @@ source $ZSH/oh-my-zsh.sh
 # eval "$(jump shell)"
 # User configuration
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
+alias ee="explorer.exe ."
