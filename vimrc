@@ -19,7 +19,7 @@ Plug 'tpope/vim-dadbod'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
-Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline'
 Plug 'dense-analysis/ale'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -46,7 +46,7 @@ Plug 'morhetz/gruvbox'
 Plug 'octol/vim-cpp-enhanced-highlight'
 "Plug 'ludovicchabant/vim-gutentags'
 "Plug 'tpope/vim-heroku'
-"Plug 'ycm-core/YouCompleteMe'
+Plug 'ycm-core/YouCompleteMe'
 
 call plug#end()
 
@@ -70,8 +70,8 @@ set expandtab
 set softtabstop=4               " Let backspace delete indent
 set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
 set virtualedit=all
-"set mouse=a
-"set mousehide
+set mouse=a
+set mousehide
 set history=8192 " more history
 if has('clipboard')
     if has('unnamedplus')  " When possible use + register for copy-paste
@@ -226,11 +226,23 @@ let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
 set completeopt=menu,menuone
 let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_collect_identifiers_from_tags_files = 1
+" default 1000
+let g:ycm_disable_for_files_larger_than_kb = 0 
+let g:ycm_auto_hover = 1
+nmap <leader>d <plug>(YCMHover)
+augroup MyYCMCustom
+  autocmd!
+  autocmd FileType c,cpp let b:ycm_hover = {
+    \ 'command': 'GetDoc',
+    \ 'syntax': &filetype
+    \ }
+augroup END
 
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
+let g:UltiSnipsEditSplit="vertical"
 
 " Setup for markdown
 let g:vim_markdown_folding_disabled = 1
@@ -250,7 +262,7 @@ endif
 " Don't jump to the first search.
 cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack!<Space>
-nnoremap <Leader>d :Files ~/Dropbox<CR>
+" nnoremap <Leader>d :Files ~/Dropbox<CR>
 nnoremap <leader>vv :e $MYVIMRC<cr>
 nnoremap <leader>sv :w <CR>:source $MYVIMRC<cr>
 
@@ -346,6 +358,95 @@ tnoremap <c-k> <c-w><c-k>
 tnoremap <c-l> <c-w><c-l> 
 tnoremap <c-h> <c-w><c-h>
 
-"let g:ycm_filetype_blacklist = {'tagbar': 1, 'notes': 1,'netrw': 1, 'unite': 1, 'text': 1, 'vimwiki': 1, 'pandoc': 1, 'infolog': 1, 'leaderf': 1, 'mail': 1}
-colorscheme gruvbox
+let g:ycm_filetype_blacklist = {'tagbar': 1, 'notes': 1,'netrw': 1, 'unite': 1, 'text': 1, 'vimwiki': 1, 'pandoc': 1, 'infolog': 1, 'leaderf': 1, 'mail': 1}
+
+
 set t_Co=256
+colorscheme PaperColor
+
+
+
+"=====================================================
+"===================== STATUSLINE ====================
+
+let s:modes = {
+      \ 'n': 'NORMAL',
+      \ 'i': 'INSERT',
+      \ 'R': 'REPLACE',
+      \ 'v': 'VISUAL',
+      \ 'V': 'V-LINE',
+      \ "\<C-v>": 'V-BLOCK',
+      \ 'c': 'COMMAND',
+      \ 's': 'SELECT',
+      \ 'S': 'S-LINE',
+      \ "\<C-s>": 'S-BLOCK',
+      \ 't': 'TERMINAL'
+      \}
+
+let s:prev_mode = ""
+function! StatusLineMode()
+  let cur_mode = get(s:modes, mode(), '')
+
+  " do not update higlight if the mode is the same
+  if cur_mode == s:prev_mode
+    return cur_mode
+  endif
+
+  if cur_mode == "NORMAL"
+    exe 'hi! StatusLine ctermfg=236'
+    exe 'hi! myModeColor cterm=bold ctermbg=148 ctermfg=22'
+  elseif cur_mode == "INSERT"
+    exe 'hi! myModeColor cterm=bold ctermbg=23 ctermfg=231'
+  elseif cur_mode == "VISUAL" || cur_mode == "V-LINE" || cur_mode == "V_BLOCK"
+    exe 'hi! StatusLine ctermfg=236'
+    exe 'hi! myModeColor cterm=bold ctermbg=208 ctermfg=88'
+  endif
+
+  let s:prev_mode = cur_mode
+  return cur_mode
+endfunction
+
+function! StatusLineFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+endfunction
+
+function! StatusLinePercent()
+  return (100 * line('.') / line('$')) . '%'
+endfunction
+
+function! StatusLineLeftInfo()
+ let branch = fugitive#head()
+ let filename = '' != expand('%:t') ? expand('%:t') : '[No Name]'
+ if branch !=# ''
+   return printf("%s | %s", branch, filename)
+ endif
+ return filename
+endfunction
+
+exe 'hi! myInfoColor ctermbg=240 ctermfg=252'
+
+" start building our statusline
+set statusline=
+
+" mode with custom colors
+set statusline+=%#myModeColor#
+set statusline+=%{StatusLineMode()}
+set statusline+=%*
+
+" left information bar (after mode)
+set statusline+=%#myInfoColor#
+set statusline+=\ %{StatusLineLeftInfo()}
+set statusline+=\ %*
+
+" go command status (requires vim-go)
+set statusline+=%#goStatuslineColor#
+set statusline+=%{go#statusline#Show()}
+set statusline+=%*
+
+" right section seperator
+set statusline+=%=
+
+" filetype, percentage, line number and column number
+set statusline+=%#myInfoColor#
+set statusline+=\ %{StatusLineFiletype()}\ %{StatusLinePercent()}\ %l:%v
+set statusline+=\ %*
