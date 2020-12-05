@@ -220,16 +220,16 @@ nmap <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
 
 let g:ycm_show_diagnostics_ui = 0
-let g:ycm_key_invoke_completion = "<C-a>"
-let g:ycm_complete_in_comments=1
-let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
+"let g:ycm_key_invoke_completion = "<C-a>"
+"let g:ycm_complete_in_comments=1
+"let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
 set completeopt=menu,menuone
 let g:ycm_add_preview_to_completeopt = 0
-let g:ycm_collect_identifiers_from_tags_files = 1
-" default 1000
-let g:ycm_disable_for_files_larger_than_kb = 0 
+"let g:ycm_collect_identifiers_from_tags_files = 1
+"" default 1000
+"let g:ycm_disable_for_files_larger_than_kb = 0 
 let g:ycm_auto_hover = 1
-nmap <leader>d <plug>(YCMHover)
+nmap <leader>s <plug>(YCMHover)
 augroup MyYCMCustom
   autocmd!
   autocmd FileType c,cpp let b:ycm_hover = {
