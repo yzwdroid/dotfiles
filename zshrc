@@ -23,6 +23,7 @@ ZSH_THEME_RANDOM_CANDIDATES=(
 )
 ZSH_THEME="random"
 export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
+export PATH=/opt/homebrew/bin:$PATH
 source $ZSH/oh-my-zsh.sh
 # eval "$(jump shell)"
 # User configuration
