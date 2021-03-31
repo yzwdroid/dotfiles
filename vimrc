@@ -43,10 +43,8 @@ Plug 'tmux-plugins/vim-tmux', {'for': 'tmux'}
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'fatih/molokai'
 Plug 'morhetz/gruvbox'
-Plug 'octol/vim-cpp-enhanced-highlight'
 "Plug 'ludovicchabant/vim-gutentags'
 "Plug 'tpope/vim-heroku'
-Plug 'ycm-core/YouCompleteMe'
 
 call plug#end()
 
