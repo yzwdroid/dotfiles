@@ -19,7 +19,7 @@ Plug 'tpope/vim-dadbod'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
-Plug 'vim-airline/vim-airline'
+Plug 'itchyny/lightline.vim'
 Plug 'dense-analysis/ale'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -124,12 +124,6 @@ if has('terminal')
   " switch to normal mode with esc
   tnoremap <Esc> <C-W>N
 
-  " mappings to move out from terminal to other views
-  tnoremap <C-h> <C-w>h
-  tnoremap <C-j> <C-w>j
-  tnoremap <C-k> <C-w>k
-  tnoremap <C-l> <C-w>l
- 
   " Open terminal in vertical, horizontal and new tab
   nnoremap <leader>tv :vsplit<cr>:term ++curwin<CR>
   nnoremap <leader>ts :split<cr>:term ++curwin<CR>
@@ -348,13 +342,6 @@ augroup END
 :nn <Leader>8 8gt
 :nn <Leader>9 8gt
 :nn <Leader>0 :tablast<CR>
-
-" let g:jedi#completions_enabled = 0
-" terminal mode // C-w,N to normal mode, " paste  
-tnoremap <c-j> <c-w><c-j> 
-tnoremap <c-k> <c-w><c-k> 
-tnoremap <c-l> <c-w><c-l> 
-tnoremap <c-h> <c-w><c-h>
 
 let g:ycm_filetype_blacklist = {'tagbar': 1, 'notes': 1,'netrw': 1, 'unite': 1, 'text': 1, 'vimwiki': 1, 'pandoc': 1, 'infolog': 1, 'leaderf': 1, 'mail': 1}
 
