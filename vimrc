@@ -254,6 +254,7 @@ endif
 " Don't jump to the first search.
 cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack!<Space>
+vnoremap <Leader>b :w !bash<cr>
 " nnoremap <Leader>d :Files ~/Dropbox<CR>
 nnoremap <leader>vv :e $MYVIMRC<cr>
 nnoremap <leader>sv :w <CR>:source $MYVIMRC<cr>
