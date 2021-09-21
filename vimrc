@@ -2,7 +2,6 @@ set nocompatible
 set backspace=indent,eol,start
 set smartindent
 set number
-"set relativenumber
 filetype plugin indent on
 syntax enable
 "curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -43,9 +42,6 @@ Plug 'tmux-plugins/vim-tmux', {'for': 'tmux'}
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'fatih/molokai'
 Plug 'morhetz/gruvbox'
-"Plug 'ludovicchabant/vim-gutentags'
-"Plug 'tpope/vim-heroku'
-
 call plug#end()
 
 let mapleader = ","
@@ -53,7 +49,6 @@ noremap \ ,
 inoremap jk <esc>
 nnoremap <c-e> ,
 vnoremap <c-e> ,
-"set tags=./.tags;,.tags
 set noswapfile
 set background=dark
 set path+=**
@@ -65,8 +60,8 @@ set textwidth=80
 set shiftwidth=4
 set tabstop=4
 set expandtab
-set softtabstop=4               " Let backspace delete indent
-set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
+set softtabstop=4 " Let backspace delete indent
+set nojoinspaces  " Prevents inserting two spaces after punctuation on a join (J)
 set virtualedit=all
 set mouse=a
 set mousehide
@@ -74,7 +69,7 @@ set history=8192 " more history
 if has('clipboard')
     if has('unnamedplus')  " When possible use + register for copy-paste
         set clipboard=unnamed,unnamedplus
-    else         " On mac and Windows, use * register for copy-paste
+    else         
         set clipboard=unnamed
     endif
 endif
@@ -86,13 +81,10 @@ cmap w!! w !sudo tee % >/dev/null
 augroup filetypedetect
   command! -nargs=* -complete=help Help vertical belowright help <args>
   autocmd FileType help wincmd L
-
   autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
   autocmd BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
   autocmd BufNewFile,BufRead *.hcl setf conf
-
   autocmd BufRead,BufNewFile *.gotmpl set filetype=gotexttmpl
-
   autocmd BufNewFile,BufRead *.ino setlocal noet ts=4 sw=4 sts=4
   autocmd BufNewFile,BufRead *.txt setlocal noet ts=4 sw=4
   autocmd BufNewFile,BufRead *.md setlocal noet ts=4 sw=4
@@ -101,7 +93,6 @@ augroup filetypedetect
   autocmd BufNewFile,BufRead *.hcl setlocal expandtab shiftwidth=2 tabstop=2
   autocmd BufNewFile,BufRead *.sh setlocal expandtab shiftwidth=2 tabstop=2
   autocmd BufNewFile,BufRead *.proto setlocal expandtab shiftwidth=2 tabstop=2
-
   autocmd FileType go setlocal noexpandtab tabstop=4 shiftwidth=4
   autocmd FileType yaml setlocal expandtab shiftwidth=2 tabstop=2
   autocmd FileType json setlocal expandtab shiftwidth=2 tabstop=2
@@ -120,22 +111,15 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 if has('terminal')
   " Kill job and close terminal window
   tnoremap <Leader>q <C-w><C-C><C-w>c<cr>
-
   " switch to normal mode with esc
   tnoremap <Esc> <C-W>N
-
   " Open terminal in vertical, horizontal and new tab
   nnoremap <leader>tv :vsplit<cr>:term ++curwin<CR>
   nnoremap <leader>ts :split<cr>:term ++curwin<CR>
   nnoremap <leader>tt :tabnew<cr>:term ++curwin<CR>
-
   tnoremap <leader>tv <C-w>:vsplit<cr>:term ++curwin<CR>
   tnoremap <leader>ts <C-w>:split<cr>:term ++curwin<CR>
   tnoremap <leader>tt <C-w>:tabnew<cr>:term ++curwin<CR>
-
-  " always start terminal in insert mode when I switch to it
-  " NOTE(arslan): startinsert doesn't work in Terminal-normal mode.
-  " autocmd WinEnter * if &buftype == 'terminal' | call feedkeys("i") | endif
 endif
 
 " Setup fold
@@ -185,18 +169,6 @@ vmap <Leader>a,, :Tabularize /,\zs<CR>
 nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 " }
-
-
-"let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
-"let g:gutentags_ctags_tagfile = '.tags'
-"let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-"let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
-"let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
-"let g:cpp_class_scope_highlight = 1
-"let g:cpp_member_variable_highlight = 1
-"let g:cpp_class_decl_highlight = 1
-"let g:cpp_experimental_simple_template_highlight = 1
-
 let g:ale_linters = {'cpp':['clang'],'c': ['clang'],'python':['pylint'],'javascript': ['eslint'], 'go': ['gopls']}
 let g:ale_linters_explicit = 1
 let g:ale_completion_delay = 500
@@ -206,29 +178,8 @@ let g:ale_echo_msg_format = '[%linter%] %code: %%s'
 let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
 let g:airline#extensions#ale#enabled = 1
-let g:ale_cpp_clang_options = '-std=c++20 -Wall'
-"let g:ale_enabled = 0
 nmap <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
-
-let g:ycm_show_diagnostics_ui = 0
-"let g:ycm_key_invoke_completion = "<C-a>"
-"let g:ycm_complete_in_comments=1
-"let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
-set completeopt=menu,menuone
-let g:ycm_add_preview_to_completeopt = 0
-"let g:ycm_collect_identifiers_from_tags_files = 1
-"" default 1000
-"let g:ycm_disable_for_files_larger_than_kb = 0 
-let g:ycm_auto_hover = 1
-nmap <leader>s <plug>(YCMHover)
-augroup MyYCMCustom
-  autocmd!
-  autocmd FileType c,cpp let b:ycm_hover = {
-    \ 'command': 'GetDoc',
-    \ 'syntax': &filetype
-    \ }
-augroup END
 
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
@@ -308,23 +259,17 @@ let g:vimwiki_global_ext = 0
 " Golang
 augroup go
   autocmd!
-
   autocmd FileType go nmap <silent> <Leader>v <Plug>(go-def-vertical)
   autocmd FileType go nmap <silent> <Leader>s <Plug>(go-def-split)
   autocmd FileType go nmap <silent> <Leader>d <Plug>(go-def-tab)
-
   autocmd FileType go nmap <silent> <Leader>x <Plug>(go-doc-vertical)
-
   autocmd FileType go nmap <silent> <Leader>i <Plug>(go-info)
   autocmd FileType go nmap <silent> <Leader>l <Plug>(go-metalinter)
-
   autocmd FileType go nmap <silent> <leader>b :<C-u>call <SID>build_go_files()<CR>
   autocmd FileType go nmap <silent> <leader>t  <Plug>(go-test)
   autocmd FileType go nmap <silent> <leader>r  <Plug>(go-run)
   autocmd FileType go nmap <silent> <leader>e  <Plug>(go-install)
-
   autocmd FileType go nmap <silent> <Leader>c <Plug>(go-coverage-toggle)
-
   " I like these more!
   autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
   autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
@@ -343,10 +288,6 @@ augroup END
 :nn <Leader>8 8gt
 :nn <Leader>9 8gt
 :nn <Leader>0 :tablast<CR>
-
 let g:ycm_filetype_blacklist = {'tagbar': 1, 'notes': 1,'netrw': 1, 'unite': 1, 'text': 1, 'vimwiki': 1, 'pandoc': 1, 'infolog': 1, 'leaderf': 1, 'mail': 1}
-
-
 set t_Co=256
 colorscheme PaperColor
-
