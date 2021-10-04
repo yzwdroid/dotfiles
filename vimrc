@@ -178,8 +178,8 @@ let g:ale_echo_msg_format = '[%linter%] %code: %%s'
 let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
 let g:airline#extensions#ale#enabled = 1
-nmap <silent> <leader>aj :ALENext<cr>
-nmap <silent> <leader>ak :ALEPrevious<cr>
+nmap <silent> <leader>j :ALENext<cr>
+nmap <silent> <leader>k :ALEPrevious<cr>
 
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
@@ -243,18 +243,10 @@ let NERDTreeShowHidden=0
 let NERDTreeKeepTreeInNewTab=1
 " }
 
-"let g:vimwiki_list = [{
-"            \ 'path': '~/Dropbox/seneca/zyang/config/vimwiki/',
-"            \ 'template_path': '~/Dropbox/seneca/zyang/config/vimwiki/templates',
-"            \ 'template_default': 'default',
-"            \ 'template_ext': '.html'}]
 let g:vimwiki_list = [{
             \ 'path': '~/Dropbox/seneca/zyang/config/vimwiki/',
             \ 'syntax': 'markdown', 'ext': '.md'}]
 let g:vimwiki_global_ext = 0
-
-" Dadbob
-" let g:db="postgresql://zyang:Yangzongwei22@zyang.ca:5432/zyangdb"
 
 " Golang
 augroup go
@@ -288,6 +280,15 @@ augroup END
 :nn <Leader>8 8gt
 :nn <Leader>9 8gt
 :nn <Leader>0 :tablast<CR>
-let g:ycm_filetype_blacklist = {'tagbar': 1, 'notes': 1,'netrw': 1, 'unite': 1, 'text': 1, 'vimwiki': 1, 'pandoc': 1, 'infolog': 1, 'leaderf': 1, 'mail': 1}
+"let g:ycm_filetype_blacklist = {'tagbar': 1, 'notes': 1,'netrw': 1, 'unite': 1, 'text': 1, 'vimwiki': 1, 'pandoc': 1, 'infolog': 1, 'leaderf': 1, 'mail': 1}
 set t_Co=256
 colorscheme PaperColor
+
+" Fast saving
+nnoremap <leader>w :w!<cr>
+nnoremap <silent> <leader>q :q!<CR>
+
+" Do not show stupid q: window
+map q: :q
+" Disable the doc preview window at top
+set completeopt-=preview
