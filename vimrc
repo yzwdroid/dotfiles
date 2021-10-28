@@ -24,7 +24,6 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'vimwiki/vimwiki'
 Plug 'mattn/emmet-vim'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mileszs/ack.vim'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
@@ -35,13 +34,13 @@ Plug 'vim-utils/vim-man'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'majutsushi/tagbar'
 Plug 'sheerun/vim-polyglot'
 Plug 'roxma/vim-tmux-clipboard'
 Plug 'tmux-plugins/vim-tmux', {'for': 'tmux'}
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'fatih/molokai'
 Plug 'morhetz/gruvbox'
+Plug 'tyru/open-browser.vim'
 call plug#end()
 
 let mapleader = ","
@@ -196,15 +195,12 @@ let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_new_list_item_indent = 2
 let g:vim_markdown_no_extensions_in_markdown = 1
 
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-
 if executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
 " Don't jump to the first search.
-cnoreabbrev Ack Ack!
-nnoremap <Leader>a :Ack!<Space>
+"cnoreabbrev Ack Ack!
+"nnoremap <Leader>a :Ack!<Space>
 vnoremap <Leader>b :w !bash<cr>
 " nnoremap <Leader>d :Files ~/Dropbox<CR>
 nnoremap <leader>vv :e $MYVIMRC<cr>
@@ -280,7 +276,6 @@ augroup END
 :nn <Leader>8 8gt
 :nn <Leader>9 8gt
 :nn <Leader>0 :tablast<CR>
-"let g:ycm_filetype_blacklist = {'tagbar': 1, 'notes': 1,'netrw': 1, 'unite': 1, 'text': 1, 'vimwiki': 1, 'pandoc': 1, 'infolog': 1, 'leaderf': 1, 'mail': 1}
 set t_Co=256
 colorscheme PaperColor
 
@@ -292,3 +287,22 @@ nnoremap <silent> <leader>q :q!<CR>
 map q: :q
 " Disable the doc preview window at top
 set completeopt-=preview
+
+" ==================== open-browser ====================
+
+" default netrw is not working anymore, switch to a custom plugin
+" (open-browser.vim)  https://github.com/vim/vim/issues/4738
+let g:netrw_nogx = 1 " disable netrw's gx mapping.
+nmap gs <Plug>(openbrowser-smart-search)
+vmap gs <Plug>(openbrowser-smart-search)
+
+" FZF
+" The default extra key bindings
+let g:fzf_action = {
+            \ 'ctrl-t': 'tab split',
+            \ 'ctrl-x': 'split',
+            \ 'ctrl-v': 'vsplit' }
+map <leader>f :Files<CR>
+map <leader>b :Buffers<CR>
+map <leader>a :Ag<CR>
+
