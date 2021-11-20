@@ -122,8 +122,7 @@ if has('terminal')
 endif
 
 " Setup fold
-set foldmethod=indent
-set foldlevel=100
+set foldmethod=syntax
 "autocmd BufRead * normal zR
 nmap <leader>f0 :set foldlevel=0<CR>
 nmap <leader>f1 :set foldlevel=1<CR>
@@ -199,9 +198,9 @@ if executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
 " Don't jump to the first search.
-"cnoreabbrev Ack Ack!
-"nnoremap <Leader>a :Ack!<Space>
-vnoremap <Leader>b :w !bash<cr>
+" cnoreabbrev Ack Ack!
+" nnoremap <Leader>a :Ack!<Space>
+" vnoremap <Leader>b :w !bash<cr>
 " nnoremap <Leader>d :Files ~/Dropbox<CR>
 nnoremap <leader>vv :e $MYVIMRC<cr>
 nnoremap <leader>sv :w <CR>:source $MYVIMRC<cr>
@@ -228,8 +227,6 @@ map <leader>et :tabe %%
 
 " NerdTree {
 map <C-n> :NERDTreeToggle<CR>
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 "let NERDTreeShowBookmarks=1
 let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
 let NERDTreeChDirMode=0
@@ -253,7 +250,7 @@ augroup go
   autocmd FileType go nmap <silent> <Leader>x <Plug>(go-doc-vertical)
   autocmd FileType go nmap <silent> <Leader>i <Plug>(go-info)
   autocmd FileType go nmap <silent> <Leader>l <Plug>(go-metalinter)
-  autocmd FileType go nmap <silent> <leader>b :<C-u>call <SID>build_go_files()<CR>
+  "autocmd FileType go nmap <silent> <leader>b :<C-u>call <SID>build_go_files()<CR>
   autocmd FileType go nmap <silent> <leader>t  <Plug>(go-test)
   autocmd FileType go nmap <silent> <leader>r  <Plug>(go-run)
   autocmd FileType go nmap <silent> <leader>e  <Plug>(go-install)
