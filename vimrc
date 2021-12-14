@@ -123,7 +123,10 @@ endif
 
 " Setup fold
 set foldmethod=syntax
-"autocmd BufRead * normal zR
+" zc close, zo open, za toggle, zC zO zA operate on all levels
+" zr reduce one more level, zR open all folds
+" zm closing one more level, zM close all folds.
+autocmd BufRead * normal zR
 nmap <leader>f0 :set foldlevel=0<CR>
 nmap <leader>f1 :set foldlevel=1<CR>
 nmap <leader>f2 :set foldlevel=2<CR>
