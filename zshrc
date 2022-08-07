@@ -22,10 +22,8 @@ ZSH_THEME_RANDOM_CANDIDATES=(
   "philips"
 )
 ZSH_THEME="random"
-export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
-export PATH=/opt/homebrew/bin:$PATH
+export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.local/bin
 source $ZSH/oh-my-zsh.sh
-# eval "$(jump shell)"
-# User configuration
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ee="explorer.exe ."
+eval "$(pyenv init -)"
+eval "$(pyenv init --path)"

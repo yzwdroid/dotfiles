@@ -9,13 +9,20 @@ syntax enable
 "    :w !bash
 call plug#begin('~/.vim/plugged')
 Plug 'Raimondi/delimitMate'
-Plug 'ervandew/supertab'
+Plug 'ycm-core/YouCompleteMe'
+" Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-dadbod'
 Plug 'tpope/vim-sensible'
+" Use gcc to comment out a line (takes a count), 
+" gc to comment out the target of a motion (for example, gcap to comment out a paragraph), 
+" gc in visual mode to comment out the selection, and gc in operator pending mode to target a comment. 
+" You can also use it as a command, either with a range like :7,17Commentary, 
+" or as part of a :global invocation like with :g/TODO/Commentary. That's it.
+" Oh, and it uncomments, too. The above maps actually toggle, and gcgc uncomments a set of adjacent commented lines.
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'itchyny/lightline.vim'
@@ -40,7 +47,11 @@ Plug 'tmux-plugins/vim-tmux', {'for': 'tmux'}
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'fatih/molokai'
 Plug 'morhetz/gruvbox'
+"Plug 'preservim/tagbar'
 Plug 'tyru/open-browser.vim'
+Plug 'tmhedberg/SimpylFold'
+Plug 'Konfekt/FastFold'
+Plug 'zhimsel/vim-stay'
 call plug#end()
 
 let mapleader = ","
@@ -98,14 +109,6 @@ augroup filetypedetect
   autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2
 augroup END
 
-" ==================== Completion + Snippet ====================
-" Ultisnips has native support for SuperTab. SuperTab does omnicompletion by
-" pressing tab. I like this better than autocompletion, but it's still fast.
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 if has('terminal')
   " Kill job and close terminal window
@@ -170,7 +173,11 @@ vmap <Leader>a,, :Tabularize /,\zs<CR>
 nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 " }
-let g:ale_linters = {'cpp':['clang'],'c': ['clang'],'python':['pylint'],'javascript': ['eslint'], 'go': ['gopls']}
+let g:ale_linters = {'cpp':['clang'],'c': ['clang'],'python':['mypy'],'javascript': ['eslint'], 'go': ['gopls']}
+let g:ale_fixers = {'python': ['black']}
+let g:ale_python_black_executable = 'black'
+let g:ale_python_black_options = '--line-length 80'
+let g:ale_fix_on_save = 1
 let g:ale_linters_explicit = 1
 let g:ale_completion_delay = 500
 let g:ale_echo_delay = 20
@@ -182,12 +189,15 @@ let g:airline#extensions#ale#enabled = 1
 nmap <silent> <leader>j :ALENext<cr>
 nmap <silent> <leader>k :ALEPrevious<cr>
 
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+" The default Expand tab key was confict with ycm
+let g:UltiSnipsExpandTrigger="<c-f>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
 let g:UltiSnipsEditSplit="vertical"
 
+nnoremap <leader>jd :YcmCompleter GoTo<CR>
 " Setup for markdown
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_fenced_languages = ['go=go', 'viml=vim', 'bash=sh']
@@ -205,7 +215,7 @@ endif
 " nnoremap <Leader>a :Ack!<Space>
 " vnoremap <Leader>b :w !bash<cr>
 " nnoremap <Leader>d :Files ~/Dropbox<CR>
-nnoremap <leader>vv :e $MYVIMRC<cr>
+nnoremap <leader>vv :vsp $MYVIMRC<cr>
 nnoremap <leader>sv :w <CR>:source $MYVIMRC<cr>
 
 " Setup window shortcuts.
@@ -243,6 +253,7 @@ let g:vimwiki_list = [{
             \ 'path': '~/Dropbox/seneca/zyang/config/vimwiki/',
             \ 'syntax': 'markdown', 'ext': '.md'}]
 let g:vimwiki_global_ext = 0
+nmap <Leader>wp :Files ~/Dropbox/seneca/zyang/config/vimwiki/<CR>
 
 " Golang
 augroup go
@@ -305,4 +316,17 @@ let g:fzf_action = {
 map <leader>f :Files<CR>
 map <leader>b :Buffers<CR>
 map <leader>a :Ag<CR>
-
+set foldmethod=indent
+nnoremap <space> za
+vnoremap <space> zf
+" Open all level folds for one fold
+nnoremap <leader>z zczA
+" za toggles a fold under the cursor.
+" zc closes a fold underneath the cursor.
+" zC closes all folds underneath the cursor, recursively.
+" zm closes a level of fold in the buffer.
+" zM closes all folds in the buffer.
+" zo opens a fold underneath the cursor.
+" zO opens all folds underneath the cursor, recursively.
+" zR opens all folds in the buffer.
+" zr opens a level of fold in the buffer.
