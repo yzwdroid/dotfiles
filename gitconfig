@@ -1,6 +1,6 @@
 [user]
 	name = Andy Yang
-	email = yzwdroid@gmail.com
+	email = andy.yang2@morningstar.com
 [alias]
 	st = status -sb
 	versions = tag -l --sort=version:refname

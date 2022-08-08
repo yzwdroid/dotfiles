@@ -33,6 +33,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'mattn/emmet-vim'
 Plug 'mileszs/ack.vim'
 Plug 'godlygeek/tabular'
+Plug 'ycm-core/YouCompleteMe'
 Plug 'plasticboy/vim-markdown'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } 
 Plug 'luochen1990/rainbow'
@@ -173,11 +174,12 @@ vmap <Leader>a,, :Tabularize /,\zs<CR>
 nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 " }
-let g:ale_linters = {'cpp':['clang'],'c': ['clang'],'python':['mypy'],'javascript': ['eslint'], 'go': ['gopls']}
-let g:ale_fixers = {'python': ['black']}
+let g:ale_linters = {'cpp':['clang'],'c': ['clang'],'python':['mypy'],'javascript': ['eslint'], 'go': ['gopls'], 'terraform': ['terraform']}
+let g:ale_fixers = {'python': ['black'], 'terraform': ['terraform','remove_trailing_lines', 'trim_whitespace']}
 let g:ale_python_black_executable = 'black'
-let g:ale_python_black_options = '--line-length 80'
+let g:ale_python_black_options = '--line-length 130'
 let g:ale_fix_on_save = 1
+let g:ale_python_mypy_auto_poetry = 1
 let g:ale_linters_explicit = 1
 let g:ale_completion_delay = 500
 let g:ale_echo_delay = 20
@@ -194,6 +196,9 @@ nmap <silent> <leader>k :ALEPrevious<cr>
 let g:UltiSnipsExpandTrigger="<c-f>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" Setup for YCM
+let g:ycm_enable_semantic_highlighting=1
+
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
 let g:UltiSnipsEditSplit="vertical"
 
@@ -330,3 +335,12 @@ nnoremap <leader>z zczA
 " zO opens all folds underneath the cursor, recursively.
 " zR opens all folds in the buffer.
 " zr opens a level of fold in the buffer.
+
+" WSL yank support
+let s:clip = '/mnt/c/Windows/System32/clip.exe'  " change this path according to your mount point
+if executable(s:clip)
+    augroup WSLYank
+        autocmd!
+        autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
+    augroup END
+endif
