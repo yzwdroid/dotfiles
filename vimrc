@@ -258,7 +258,7 @@ let g:vimwiki_list = [{
             \ 'path': '~/Dropbox/seneca/zyang/config/vimwiki/',
             \ 'syntax': 'markdown', 'ext': '.md'}]
 let g:vimwiki_global_ext = 0
-nmap <Leader>wp :Files ~/Dropbox/seneca/zyang/config/vimwiki/<CR>
+nmap <Leader>wf :Files ~/Dropbox/seneca/zyang/config/vimwiki/<CR>
 
 " Golang
 augroup go
