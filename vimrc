@@ -29,7 +29,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'dense-analysis/ale'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'vimwiki/vimwiki'
 Plug 'mattn/emmet-vim'
 Plug 'mileszs/ack.vim'
 Plug 'godlygeek/tabular'
@@ -49,9 +48,12 @@ Plug 'fatih/molokai'
 Plug 'morhetz/gruvbox'
 "Plug 'preservim/tagbar'
 Plug 'tyru/open-browser.vim'
+Plug 'tyru/open-browser-github.vim'
 Plug 'tmhedberg/SimpylFold'
 Plug 'Konfekt/FastFold'
 Plug 'zhimsel/vim-stay'
+Plug 'lervag/wiki.vim'
+Plug 'alok/notational-fzf-vim'
 call plug#end()
 
 let mapleader = ","
@@ -330,3 +332,7 @@ nnoremap <leader>z zczA
 " zO opens all folds underneath the cursor, recursively.
 " zR opens all folds in the buffer.
 " zr opens a level of fold in the buffer.
+
+let g:wiki_root = '~/Library/Mobile Documents/iCloud~md~obsidian/Documents/vimwiki'
+let g:nv_search_paths = ['~/wiki']
+nnoremap <silent> <c-s> :NV<CR>
