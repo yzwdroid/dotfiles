@@ -127,7 +127,6 @@ if has('terminal')
   tnoremap <leader>tt <C-w>:tabnew<cr>:term ++curwin<CR>
 endif
 
-<<<<<<< HEAD
 " Setup fold
 set foldmethod=syntax
 " zc close, zo open, za toggle, zC zO zA operate on all levels
@@ -377,7 +376,6 @@ nnoremap <leader>z zczA
 " zR opens all folds in the buffer.
 " zr opens a level of fold in the buffer.
 
-<<<<<<< HEAD
 " WSL yank support
 " let s:clip = '/mnt/c/Windows/System32/clip.exe'  " change this path according to your mount point
 " if executable(s:clip)
