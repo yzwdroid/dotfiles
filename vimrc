@@ -27,11 +27,13 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'itchyny/lightline.vim'
 Plug 'dense-analysis/ale'
+Plug 'vimwiki/vimwiki'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'mattn/emmet-vim'
 Plug 'mileszs/ack.vim'
 Plug 'godlygeek/tabular'
+Plug 'ycm-core/YouCompleteMe'
 Plug 'plasticboy/vim-markdown'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } 
 Plug 'luochen1990/rainbow'
@@ -46,6 +48,7 @@ Plug 'tmux-plugins/vim-tmux', {'for': 'tmux'}
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'fatih/molokai'
 Plug 'morhetz/gruvbox'
+"Plug 'preservim/tagbar'
 Plug 'tyru/open-browser.vim'
 Plug 'tyru/open-browser-github.vim'
 Plug 'tmhedberg/SimpylFold'
@@ -124,60 +127,14 @@ if has('terminal')
   tnoremap <leader>tt <C-w>:tabnew<cr>:term ++curwin<CR>
 endif
 
-" Setup fold
-set foldmethod=syntax
-" zc close, zo open, za toggle, zC zO zA operate on all levels
-" zr reduce one more level, zR open all folds
-" zm closing one more level, zM close all folds.
-autocmd BufRead * normal zR
-nmap <leader>f0 :set foldlevel=0<CR>
-nmap <leader>f1 :set foldlevel=1<CR>
-nmap <leader>f2 :set foldlevel=2<CR>
-nmap <leader>f3 :set foldlevel=3<CR>
-nmap <leader>f4 :set foldlevel=4<CR>
-nmap <leader>f5 :set foldlevel=5<CR>
-nmap <leader>f6 :set foldlevel=6<CR>
-nmap <leader>f7 :set foldlevel=7<CR>
-nmap <leader>f8 :set foldlevel=8<CR>
-nmap <leader>f9 :set foldlevel=9<CR>
 
-" Fugitive {
-nnoremap <silent> <leader>gs :Gstatus<CR>
-nnoremap <silent> <leader>gd :Gdiff<CR>
-nnoremap <silent> <leader>gc :Gcommit<CR>
-nnoremap <silent> <leader>gb :Gblame<CR>
-nnoremap <silent> <leader>gl :Glog<CR>
-nnoremap <silent> <leader>gp :Git push<CR>
-nnoremap <silent> <leader>gr :Gread<CR>
-nnoremap <silent> <leader>gw :Gwrite<CR>
-nnoremap <silent> <leader>ge :Gedit<CR>
-nnoremap <silent> <leader>gi :Git add -p %<CR>
-nnoremap <silent> <leader>gg :SignifyToggle<CR>
-"}
 
-" Tabularize {
-nmap <Leader>a& :Tabularize /&<CR>
-vmap <Leader>a& :Tabularize /&<CR>
-nmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
-vmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
-nmap <Leader>a=> :Tabularize /=><CR>
-vmap <Leader>a=> :Tabularize /=><CR>
-nmap <Leader>a: :Tabularize /:<CR>
-vmap <Leader>a: :Tabularize /:<CR>
-nmap <Leader>a:: :Tabularize /:\zs<CR>
-vmap <Leader>a:: :Tabularize /:\zs<CR>
-nmap <Leader>a, :Tabularize /,<CR>
-vmap <Leader>a, :Tabularize /,<CR>
-nmap <Leader>a,, :Tabularize /,\zs<CR>
-vmap <Leader>a,, :Tabularize /,\zs<CR>
-nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-" }
-let g:ale_linters = {'cpp':['clang'],'c': ['clang'],'python':['mypy'],'javascript': ['eslint'], 'go': ['gopls']}
-let g:ale_fixers = {'python': ['black']}
+let g:ale_linters = {'cpp':['clang'],'c': ['clang'],'python':['mypy'],'javascript': ['eslint'], 'go': ['gopls'], 'terraform': ['terraform']}
+let g:ale_fixers = {'python': ['black'], 'terraform': ['terraform','remove_trailing_lines', 'trim_whitespace']}
 let g:ale_python_black_executable = 'black'
-let g:ale_python_black_options = '--line-length 80'
+let g:ale_python_black_options = '--line-length 130'
 let g:ale_fix_on_save = 1
+let g:ale_python_mypy_auto_poetry = 1
 let g:ale_linters_explicit = 1
 let g:ale_completion_delay = 500
 let g:ale_echo_delay = 20
@@ -194,6 +151,9 @@ nmap <silent> <leader>k :ALEPrevious<cr>
 let g:UltiSnipsExpandTrigger="<c-f>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" Setup for YCM
+let g:ycm_enable_semantic_highlighting=1
+
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
 let g:UltiSnipsEditSplit="vertical"
 
@@ -210,13 +170,11 @@ let g:vim_markdown_no_extensions_in_markdown = 1
 if executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
-" Don't jump to the first search.
-" cnoreabbrev Ack Ack!
-" nnoremap <Leader>a :Ack!<Space>
-" vnoremap <Leader>b :w !bash<cr>
+
 " nnoremap <Leader>d :Files ~/Dropbox<CR>
 nnoremap <leader>vv :vsp $MYVIMRC<cr>
 nnoremap <leader>sv :w <CR>:source $MYVIMRC<cr>
+nnoremap <leader>ss :vsp ~/.tmux.conf<cr>
 
 " Setup window shortcuts.
 nnoremap <C-H> <C-W><C-H>
@@ -253,7 +211,6 @@ let g:vimwiki_list = [{
             \ 'path': '~/Dropbox/seneca/zyang/config/vimwiki/',
             \ 'syntax': 'markdown', 'ext': '.md'}]
 let g:vimwiki_global_ext = 0
-nmap <Leader>wp :Files ~/Dropbox/seneca/zyang/config/vimwiki/<CR>
 
 " Golang
 augroup go
@@ -264,7 +221,6 @@ augroup go
   autocmd FileType go nmap <silent> <Leader>x <Plug>(go-doc-vertical)
   autocmd FileType go nmap <silent> <Leader>i <Plug>(go-info)
   autocmd FileType go nmap <silent> <Leader>l <Plug>(go-metalinter)
-  "autocmd FileType go nmap <silent> <leader>b :<C-u>call <SID>build_go_files()<CR>
   autocmd FileType go nmap <silent> <leader>t  <Plug>(go-test)
   autocmd FileType go nmap <silent> <leader>r  <Plug>(go-run)
   autocmd FileType go nmap <silent> <leader>e  <Plug>(go-install)
@@ -288,10 +244,6 @@ map q: :q
 " Disable the doc preview window at top
 set completeopt-=preview
 
-" ==================== open-browser ====================
-
-" default netrw is not working anymore, switch to a custom plugin
-" (open-browser.vim)  https://github.com/vim/vim/issues/4738
 let g:netrw_nogx = 1 " disable netrw's gx mapping.
 nmap gs <Plug>(openbrowser-smart-search)
 vmap gs <Plug>(openbrowser-smart-search)
@@ -301,11 +253,15 @@ vmap gs <Plug>(openbrowser-smart-search)
 let g:fzf_action = {
             \ 'ctrl-t': 'tab split',
             \ 'ctrl-x': 'split',
-            \ 'ctrl-v': 'vsplit' }
+            \ 'ctrl-v': 'vsplit'}
+
 map <leader>f :Files<CR>
 map <leader>b :Buffers<CR>
 map <leader>a :Ag<CR>
+
 set foldmethod=indent
+autocmd BufRead * normal zR
+
 nnoremap <space> za
 vnoremap <space> zf
 " Open all level folds for one fold
@@ -320,9 +276,6 @@ nnoremap <leader>z zczA
 " zR opens all folds in the buffer.
 " zr opens a level of fold in the buffer.
 
-let g:nv_search_paths = ['~/wiki']
-nnoremap <silent> <c-s> :NV<CR>
-
 " WSL yank support
 let s:clip = '/mnt/c/Windows/System32/clip.exe'  " change this path according to your mount point
 if executable(s:clip)
@@ -331,3 +284,6 @@ if executable(s:clip)
         autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
     augroup END
 endif
+
+let g:nv_search_paths = ['~/wiki', 'notes.md']
+nnoremap <silent> <leader>n :NV<CR>
