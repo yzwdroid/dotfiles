@@ -46,13 +46,11 @@ Plug 'tmux-plugins/vim-tmux', {'for': 'tmux'}
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'fatih/molokai'
 Plug 'morhetz/gruvbox'
-"Plug 'preservim/tagbar'
 Plug 'tyru/open-browser.vim'
 Plug 'tyru/open-browser-github.vim'
 Plug 'tmhedberg/SimpylFold'
 Plug 'Konfekt/FastFold'
 Plug 'zhimsel/vim-stay'
-Plug 'lervag/wiki.vim'
 Plug 'alok/notational-fzf-vim'
 call plug#end()
 
@@ -278,17 +276,6 @@ augroup go
   autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
 augroup END
 
-" tab 
-:nn <Leader>1 1gt
-:nn <Leader>2 2gt
-:nn <Leader>3 3gt
-:nn <Leader>4 4gt
-:nn <Leader>5 5gt
-:nn <Leader>6 6gt
-:nn <Leader>7 7gt
-:nn <Leader>8 8gt
-:nn <Leader>9 8gt
-:nn <Leader>0 :tablast<CR>
 set t_Co=256
 colorscheme PaperColor
 
@@ -333,6 +320,14 @@ nnoremap <leader>z zczA
 " zR opens all folds in the buffer.
 " zr opens a level of fold in the buffer.
 
-let g:wiki_root = '~/Library/Mobile Documents/iCloud~md~obsidian/Documents/vimwiki'
 let g:nv_search_paths = ['~/wiki']
 nnoremap <silent> <c-s> :NV<CR>
+
+" WSL yank support
+let s:clip = '/mnt/c/Windows/System32/clip.exe'  " change this path according to your mount point
+if executable(s:clip)
+    augroup WSLYank
+        autocmd!
+        autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
+    augroup END
+endif
