@@ -27,6 +27,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'itchyny/lightline.vim'
 Plug 'dense-analysis/ale'
+Plug 'vimwiki/vimwiki'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'mattn/emmet-vim'
@@ -53,7 +54,6 @@ Plug 'tyru/open-browser-github.vim'
 Plug 'tmhedberg/SimpylFold'
 Plug 'Konfekt/FastFold'
 Plug 'zhimsel/vim-stay'
-Plug 'lervag/wiki.vim'
 Plug 'alok/notational-fzf-vim'
 call plug#end()
 
@@ -127,6 +127,7 @@ if has('terminal')
   tnoremap <leader>tt <C-w>:tabnew<cr>:term ++curwin<CR>
 endif
 
+<<<<<<< HEAD
 " Setup fold
 set foldmethod=syntax
 " zc close, zo open, za toggle, zC zO zA operate on all levels
@@ -178,6 +179,57 @@ vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 " }
 let g:ale_linters = {'cpp':['clang'],'c': ['clang'],'python':['mypy'],'javascript': ['eslint'], 'go': ['gopls'], 'terraform': ['terraform']}
 let g:ale_fixers = {'python': ['black'], 'terraform': ['terraform','remove_trailing_lines', 'trim_whitespace']}
+" Setup fold
+set foldmethod=syntax
+" zc close, zo open, za toggle, zC zO zA operate on all levels
+" zr reduce one more level, zR open all folds
+" zm closing one more level, zM close all folds.
+autocmd BufRead * normal zR
+nmap <leader>f0 :set foldlevel=0<CR>
+nmap <leader>f1 :set foldlevel=1<CR>
+nmap <leader>f2 :set foldlevel=2<CR>
+nmap <leader>f3 :set foldlevel=3<CR>
+nmap <leader>f4 :set foldlevel=4<CR>
+nmap <leader>f5 :set foldlevel=5<CR>
+nmap <leader>f6 :set foldlevel=6<CR>
+nmap <leader>f7 :set foldlevel=7<CR>
+nmap <leader>f8 :set foldlevel=8<CR>
+nmap <leader>f9 :set foldlevel=9<CR>
+
+" Fugitive {
+nnoremap <silent> <leader>gs :Gstatus<CR>
+nnoremap <silent> <leader>gd :Gdiff<CR>
+nnoremap <silent> <leader>gc :Gcommit<CR>
+nnoremap <silent> <leader>gb :Gblame<CR>
+nnoremap <silent> <leader>gl :Glog<CR>
+nnoremap <silent> <leader>gp :Git push<CR>
+nnoremap <silent> <leader>gr :Gread<CR>
+nnoremap <silent> <leader>gw :Gwrite<CR>
+nnoremap <silent> <leader>ge :Gedit<CR>
+nnoremap <silent> <leader>gi :Git add -p %<CR>
+nnoremap <silent> <leader>gg :SignifyToggle<CR>
+"}
+
+" Tabularize {
+nmap <Leader>a& :Tabularize /&<CR>
+vmap <Leader>a& :Tabularize /&<CR>
+nmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
+vmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
+nmap <Leader>a=> :Tabularize /=><CR>
+vmap <Leader>a=> :Tabularize /=><CR>
+nmap <Leader>a: :Tabularize /:<CR>
+vmap <Leader>a: :Tabularize /:<CR>
+nmap <Leader>a:: :Tabularize /:\zs<CR>
+vmap <Leader>a:: :Tabularize /:\zs<CR>
+nmap <Leader>a, :Tabularize /,<CR>
+vmap <Leader>a, :Tabularize /,<CR>
+nmap <Leader>a,, :Tabularize /,\zs<CR>
+vmap <Leader>a,, :Tabularize /,\zs<CR>
+nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+" }
+let g:ale_linters = {'cpp':['clang'],'c': ['clang'],'python':['mypy'],'javascript': ['eslint'], 'go': ['gopls']}
+let g:ale_fixers = {'python': ['black']}
 let g:ale_python_black_executable = 'black'
 let g:ale_python_black_options = '--line-length 130'
 let g:ale_fix_on_save = 1
@@ -217,13 +269,11 @@ let g:vim_markdown_no_extensions_in_markdown = 1
 if executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
-" Don't jump to the first search.
-" cnoreabbrev Ack Ack!
-" nnoremap <Leader>a :Ack!<Space>
-" vnoremap <Leader>b :w !bash<cr>
+
 " nnoremap <Leader>d :Files ~/Dropbox<CR>
 nnoremap <leader>vv :vsp $MYVIMRC<cr>
 nnoremap <leader>sv :w <CR>:source $MYVIMRC<cr>
+nnoremap <leader>ss :vsp ~/.tmux.conf<cr>
 
 " Setup window shortcuts.
 nnoremap <C-H> <C-W><C-H>
@@ -283,17 +333,6 @@ augroup go
   autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
 augroup END
 
-" tab 
-:nn <Leader>1 1gt
-:nn <Leader>2 2gt
-:nn <Leader>3 3gt
-:nn <Leader>4 4gt
-:nn <Leader>5 5gt
-:nn <Leader>6 6gt
-:nn <Leader>7 7gt
-:nn <Leader>8 8gt
-:nn <Leader>9 8gt
-:nn <Leader>0 :tablast<CR>
 set t_Co=256
 colorscheme PaperColor
 
@@ -306,10 +345,6 @@ map q: :q
 " Disable the doc preview window at top
 set completeopt-=preview
 
-" ==================== open-browser ====================
-
-" default netrw is not working anymore, switch to a custom plugin
-" (open-browser.vim)  https://github.com/vim/vim/issues/4738
 let g:netrw_nogx = 1 " disable netrw's gx mapping.
 nmap gs <Plug>(openbrowser-smart-search)
 vmap gs <Plug>(openbrowser-smart-search)
@@ -319,11 +354,15 @@ vmap gs <Plug>(openbrowser-smart-search)
 let g:fzf_action = {
             \ 'ctrl-t': 'tab split',
             \ 'ctrl-x': 'split',
-            \ 'ctrl-v': 'vsplit' }
+            \ 'ctrl-v': 'vsplit'}
+
 map <leader>f :Files<CR>
 map <leader>b :Buffers<CR>
 map <leader>a :Ag<CR>
+
 set foldmethod=indent
+autocmd BufRead * normal zR
+
 nnoremap <space> za
 vnoremap <space> zf
 " Open all level folds for one fold
@@ -338,6 +377,7 @@ nnoremap <leader>z zczA
 " zR opens all folds in the buffer.
 " zr opens a level of fold in the buffer.
 
+<<<<<<< HEAD
 " WSL yank support
 " let s:clip = '/mnt/c/Windows/System32/clip.exe'  " change this path according to your mount point
 " if executable(s:clip)
@@ -347,6 +387,5 @@ nnoremap <leader>z zczA
 "     augroup END
 " endif
 
-let g:wiki_root = '~/Library/Mobile Documents/iCloud~md~obsidian/Documents/vimwiki'
-let g:nv_search_paths = ['~/wiki']
-nnoremap <silent> <c-s> :NV<CR>
+let g:nv_search_paths = ['~/wiki', 'notes.md']
+nnoremap <silent> <leader>n :NV<CR>
