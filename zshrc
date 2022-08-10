@@ -29,7 +29,3 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ee="explorer.exe ."
 eval "$(pyenv init --path)"
-||||||| constructed merge base
-=======
-eval "$(pyenv init --path)"
->>>>>>> Save
