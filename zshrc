@@ -23,6 +23,7 @@ ZSH_THEME_RANDOM_CANDIDATES=(
 )
 ZSH_THEME="random"
 export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.local/bin
+export PATH=$PATH:'/mnt/c/Users/ayang3/AppData/Local/Programs/Microsoft VS Code/bin'
 source $ZSH/oh-my-zsh.sh
 alias ee="explorer.exe ."
 eval "$(pyenv init -)"
