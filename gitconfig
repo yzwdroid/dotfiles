@@ -1,5 +1,6 @@
 [user]
 	name = Andy Yang
+    email = "Andy.Yang2@morningstar.com"
 [alias]
 	ca = commit --amend -v
 	save = commit -a -m "Save"
