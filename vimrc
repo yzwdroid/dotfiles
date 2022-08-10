@@ -127,108 +127,8 @@ if has('terminal')
   tnoremap <leader>tt <C-w>:tabnew<cr>:term ++curwin<CR>
 endif
 
-" Setup fold
-set foldmethod=syntax
-" zc close, zo open, za toggle, zC zO zA operate on all levels
-" zr reduce one more level, zR open all folds
-" zm closing one more level, zM close all folds.
-autocmd BufRead * normal zR
-nmap <leader>f0 :set foldlevel=0<CR>
-nmap <leader>f1 :set foldlevel=1<CR>
-nmap <leader>f2 :set foldlevel=2<CR>
-nmap <leader>f3 :set foldlevel=3<CR>
-nmap <leader>f4 :set foldlevel=4<CR>
-nmap <leader>f5 :set foldlevel=5<CR>
-nmap <leader>f6 :set foldlevel=6<CR>
-nmap <leader>f7 :set foldlevel=7<CR>
-nmap <leader>f8 :set foldlevel=8<CR>
-nmap <leader>f9 :set foldlevel=9<CR>
-
-" Fugitive {
-nnoremap <silent> <leader>gs :Gstatus<CR>
-nnoremap <silent> <leader>gd :Gdiff<CR>
-nnoremap <silent> <leader>gc :Gcommit<CR>
-nnoremap <silent> <leader>gb :Gblame<CR>
-nnoremap <silent> <leader>gl :Glog<CR>
-nnoremap <silent> <leader>gp :Git push<CR>
-nnoremap <silent> <leader>gr :Gread<CR>
-nnoremap <silent> <leader>gw :Gwrite<CR>
-nnoremap <silent> <leader>ge :Gedit<CR>
-nnoremap <silent> <leader>gi :Git add -p %<CR>
-nnoremap <silent> <leader>gg :SignifyToggle<CR>
-"}
-
-" Tabularize {
-nmap <Leader>a& :Tabularize /&<CR>
-vmap <Leader>a& :Tabularize /&<CR>
-nmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
-vmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
-nmap <Leader>a=> :Tabularize /=><CR>
-vmap <Leader>a=> :Tabularize /=><CR>
-nmap <Leader>a: :Tabularize /:<CR>
-vmap <Leader>a: :Tabularize /:<CR>
-nmap <Leader>a:: :Tabularize /:\zs<CR>
-vmap <Leader>a:: :Tabularize /:\zs<CR>
-nmap <Leader>a, :Tabularize /,<CR>
-vmap <Leader>a, :Tabularize /,<CR>
-nmap <Leader>a,, :Tabularize /,\zs<CR>
-vmap <Leader>a,, :Tabularize /,\zs<CR>
-nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-" }
 let g:ale_linters = {'cpp':['clang'],'c': ['clang'],'python':['mypy'],'javascript': ['eslint'], 'go': ['gopls'], 'terraform': ['terraform']}
 let g:ale_fixers = {'python': ['black'], 'terraform': ['terraform','remove_trailing_lines', 'trim_whitespace']}
-" Setup fold
-set foldmethod=syntax
-" zc close, zo open, za toggle, zC zO zA operate on all levels
-" zr reduce one more level, zR open all folds
-" zm closing one more level, zM close all folds.
-autocmd BufRead * normal zR
-nmap <leader>f0 :set foldlevel=0<CR>
-nmap <leader>f1 :set foldlevel=1<CR>
-nmap <leader>f2 :set foldlevel=2<CR>
-nmap <leader>f3 :set foldlevel=3<CR>
-nmap <leader>f4 :set foldlevel=4<CR>
-nmap <leader>f5 :set foldlevel=5<CR>
-nmap <leader>f6 :set foldlevel=6<CR>
-nmap <leader>f7 :set foldlevel=7<CR>
-nmap <leader>f8 :set foldlevel=8<CR>
-nmap <leader>f9 :set foldlevel=9<CR>
-
-" Fugitive {
-nnoremap <silent> <leader>gs :Gstatus<CR>
-nnoremap <silent> <leader>gd :Gdiff<CR>
-nnoremap <silent> <leader>gc :Gcommit<CR>
-nnoremap <silent> <leader>gb :Gblame<CR>
-nnoremap <silent> <leader>gl :Glog<CR>
-nnoremap <silent> <leader>gp :Git push<CR>
-nnoremap <silent> <leader>gr :Gread<CR>
-nnoremap <silent> <leader>gw :Gwrite<CR>
-nnoremap <silent> <leader>ge :Gedit<CR>
-nnoremap <silent> <leader>gi :Git add -p %<CR>
-nnoremap <silent> <leader>gg :SignifyToggle<CR>
-"}
-
-" Tabularize {
-nmap <Leader>a& :Tabularize /&<CR>
-vmap <Leader>a& :Tabularize /&<CR>
-nmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
-vmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
-nmap <Leader>a=> :Tabularize /=><CR>
-vmap <Leader>a=> :Tabularize /=><CR>
-nmap <Leader>a: :Tabularize /:<CR>
-vmap <Leader>a: :Tabularize /:<CR>
-nmap <Leader>a:: :Tabularize /:\zs<CR>
-vmap <Leader>a:: :Tabularize /:\zs<CR>
-nmap <Leader>a, :Tabularize /,<CR>
-vmap <Leader>a, :Tabularize /,<CR>
-nmap <Leader>a,, :Tabularize /,\zs<CR>
-vmap <Leader>a,, :Tabularize /,\zs<CR>
-nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-" }
-let g:ale_linters = {'cpp':['clang'],'c': ['clang'],'python':['mypy'],'javascript': ['eslint'], 'go': ['gopls']}
-let g:ale_fixers = {'python': ['black']}
 let g:ale_python_black_executable = 'black'
 let g:ale_python_black_options = '--line-length 130'
 let g:ale_fix_on_save = 1
@@ -303,13 +203,11 @@ let NERDTreeQuitOnOpen=1
 let NERDTreeMouseMode=2
 let NERDTreeShowHidden=0
 let NERDTreeKeepTreeInNewTab=1
-" }
 
 let g:vimwiki_list = [{
             \ 'path': '~/Dropbox/seneca/zyang/config/vimwiki/',
             \ 'syntax': 'markdown', 'ext': '.md'}]
 let g:vimwiki_global_ext = 0
-nmap <Leader>wf :Files ~/Dropbox/seneca/zyang/config/vimwiki/<CR>
 
 " Golang
 augroup go
