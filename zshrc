@@ -22,10 +22,11 @@ ZSH_THEME_RANDOM_CANDIDATES=(
   "philips"
 )
 ZSH_THEME="random"
-export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.local/bin
+export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.local/bin:/mnt/c/Users/ayang3/AppData/Local/Programs/Microsoft\ VS\ Code/bin
 source $ZSH/oh-my-zsh.sh
 # eval "$(jump shell)"
 # User configuration
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias ee="explorer.exe ."
+alias ee="/mnt/c/windows/explorer.exe ."
 eval "$(pyenv init --path)"
+/mnt/c/windows/System32/wsl.exe -d wsl-vpnkit service wsl-vpnkit start
