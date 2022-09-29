@@ -17,6 +17,12 @@ antigen apply
 
 plugins=(fzf)
 export EDITOR=vim
+# Enable Ctrl-x-e to edit command line
+autoload -U edit-command-line
+# Emacs style
+zle -N edit-command-line
+bindkey '^e' edit-command-line
+bindkey '^x' edit-command-line
 ZSH_THEME_RANDOM_CANDIDATES=(
   "robbyrussell"
   "philips"
