@@ -9,13 +9,13 @@ syntax enable
 "    :w !bash
 call plug#begin('~/.vim/plugged')
 Plug 'Raimondi/delimitMate'
-Plug 'ycm-core/YouCompleteMe'
+"Plug 'ycm-core/YouCompleteMe'
 " Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-dadbod'
+"Plug 'tpope/vim-dadbod'
 Plug 'tpope/vim-sensible'
 " Use gcc to comment out a line (takes a count), 
 " gc to comment out the target of a motion (for example, gcap to comment out a paragraph), 
@@ -28,17 +28,17 @@ Plug 'tpope/vim-eunuch'
 Plug 'itchyny/lightline.vim'
 Plug 'dense-analysis/ale'
 Plug 'vimwiki/vimwiki'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+"Plug 'SirVer/ultisnips'
+"Plug 'honza/vim-snippets'
 Plug 'mattn/emmet-vim'
-Plug 'mileszs/ack.vim'
-Plug 'godlygeek/tabular'
-Plug 'ycm-core/YouCompleteMe'
-Plug 'plasticboy/vim-markdown'
+"Plug 'mileszs/ack.vim'
+"Plug 'godlygeek/tabular'
+"Plug 'ycm-core/YouCompleteMe'
+"Plug 'plasticboy/vim-markdown'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } 
 Plug 'luochen1990/rainbow'
 Plug 'vim-nerdtree/nerdtree'
-Plug 'vim-utils/vim-man'
+"Plug 'vim-utils/vim-man'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'NLKNguyen/papercolor-theme'
@@ -46,15 +46,15 @@ Plug 'sheerun/vim-polyglot'
 Plug 'roxma/vim-tmux-clipboard'
 Plug 'tmux-plugins/vim-tmux', {'for': 'tmux'}
 Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'fatih/molokai'
-Plug 'morhetz/gruvbox'
+"Plug 'fatih/molokai'
+"Plug 'morhetz/gruvbox'
 "Plug 'preservim/tagbar'
-Plug 'tyru/open-browser.vim'
-Plug 'tyru/open-browser-github.vim'
-Plug 'tmhedberg/SimpylFold'
-Plug 'Konfekt/FastFold'
-Plug 'zhimsel/vim-stay'
-Plug 'alok/notational-fzf-vim'
+"Plug 'tyru/open-browser.vim'
+"Plug 'tyru/open-browser-github.vim'
+"Plug 'tmhedberg/SimpylFold'
+"Plug 'Konfekt/FastFold'
+"Plug 'zhimsel/vim-stay'
+"Plug 'alok/notational-fzf-vim'
 call plug#end()
 
 let mapleader = ","
@@ -165,9 +165,9 @@ let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_new_list_item_indent = 2
 let g:vim_markdown_no_extensions_in_markdown = 1
 
-if executable('ag')
-    let g:ackprg = 'ag --vimgrep'
-endif
+" if executable('ag')
+"     let g:ackprg = 'ag --vimgrep'
+" endif
 
 " nnoremap <Leader>d :Files ~/Dropbox<CR>
 nnoremap <leader>vv :vsp $MYVIMRC<cr>
@@ -275,13 +275,13 @@ nnoremap <leader>z zczA
 " zr opens a level of fold in the buffer.
 
 " WSL yank support
-let s:clip = '/mnt/c/Windows/System32/clip.exe'  " change this path according to your mount point
-if executable(s:clip)
-    augroup WSLYank
-        autocmd!
-        autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
-    augroup END
-endif
+" let s:clip = '/mnt/c/Windows/System32/clip.exe'  " change this path according to your mount point
+" if executable(s:clip)
+"     augroup WSLYank
+"         autocmd!
+"         autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
+"     augroup END
+" endif
 
 let g:nv_search_paths = ['~/wiki', 'notes.md']
 nnoremap <silent> <leader>n :NV<CR>
