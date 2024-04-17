@@ -22,9 +22,12 @@ ZSH_THEME_RANDOM_CANDIDATES=(
   "philips"
 )
 ZSH_THEME="random"
-export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.local/bin:/mnt/c/Users/ayang3/AppData/Local/Programs/Microsoft\ VS\ Code/bin
+export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.local/bin
 source $ZSH/oh-my-zsh.sh
 # eval "$(jump shell)"
 # User configuration
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-# eval "$(pyenv init --path)"
+eval "$(pyenv init --path)"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
