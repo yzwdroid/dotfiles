@@ -4,9 +4,6 @@ set smartindent
 set number
 filetype plugin indent on
 syntax enable
-"curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-"    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-"    :w !bash
 call plug#begin('~/.vim/plugged')
 Plug 'Raimondi/delimitMate'
 "Plug 'ycm-core/YouCompleteMe'
@@ -15,7 +12,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-dispatch'
-"Plug 'tpope/vim-dadbod'
 Plug 'tpope/vim-sensible'
 " Use gcc to comment out a line (takes a count), 
 " gc to comment out the target of a motion (for example, gcap to comment out a paragraph), 
@@ -33,12 +29,10 @@ Plug 'vimwiki/vimwiki'
 Plug 'mattn/emmet-vim'
 "Plug 'mileszs/ack.vim'
 "Plug 'godlygeek/tabular'
-"Plug 'ycm-core/YouCompleteMe'
 "Plug 'plasticboy/vim-markdown'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } 
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } 
 Plug 'luochen1990/rainbow'
 Plug 'vim-nerdtree/nerdtree'
-"Plug 'vim-utils/vim-man'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'NLKNguyen/papercolor-theme'

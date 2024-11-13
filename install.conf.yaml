@@ -7,13 +7,11 @@
 - clean: ['~', '~/.config']
 
 - link:
-    ~/.agignore:
     ~/.bash:
     ~/.bash_profile:
     ~/.bashrc:
     ~/.gitconfig:
     ~/.gitignore_global:
-    ~/.inputrc:
     ~/.shell:
     ~/.tmux.conf:
     ~/.vimrc:
@@ -26,6 +24,3 @@
   - git submodule sync --recursive
   # the following have to run after linking ~/.gitconfig
   - git update-submodules
-  - >
-    git cleanall -f
-    shell/plugins/

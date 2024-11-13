@@ -31,3 +31,8 @@ eval "$(pyenv init --path)"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+# export PATH="/opt/homebrew/opt:$PATH"
+
+# autoload edit-command-line
+# zle -N edit-command-line
+# bindkey -M vicmd 'v' edit-command-line
